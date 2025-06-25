@@ -122,31 +122,31 @@ you will experience issues. You will have to repair devices every time you switc
 To fix this, you need to sync the pairing keys.
 1. Log into Linux (unpair your devices if they were already paired) and pair your devices.
 2. Restart and log into Windows (unpair your devices if they were already paired) and pair your devices.
-  - If you are having trouble removing a BT device, go into Device Manager -> Show -> Hidden devices
-  - Remove greyed-out bluetooth devices.
-  - Try removing your device again.
+    - If you are having trouble removing a BT device, go into Device Manager -> Show -> Hidden devices
+    - Remove greyed-out bluetooth devices.
+    - Try removing your device again.
 3. Restart and log into Linux.
 4. Mount your windows partition.
-  - Create a directory for the mount: `sudo mkdir /mnt/windows`
-  - List your drives: `sudo fdisk -l`
-  - Find a partition with type "Microsoft basic data". It should look similar to "/dev/nvme0n1pX"
-  - Install ntfs-3g: `sudo pacman -Syu ntfs-3g`
-  - Mount the partition: `sudo mount -t ntfs-3g /dev/nvme0n1p3 /mnt/windows`
+    - Create a directory for the mount: `sudo mkdir /mnt/windows`
+    - List your drives: `sudo fdisk -l`
+    - Find a partition with type "Microsoft basic data". It should look similar to "/dev/nvme0n1pX"
+    - Install ntfs-3g: `sudo pacman -Syu ntfs-3g`
+    - Mount the partition: `sudo mount -t ntfs-3g /dev/nvme0n1p3 /mnt/windows`
 5. Find the MAC address of your BT Adapter and BT device.
-  - Run `sudo ls /var/lib/bluetooth/` to find the AdapterMAC.
-  - You can use your prefered BT front-end (like Blueman) to find the DeviceMAC or run `sudo ls /var/lib/bluetooth/<AdapterMAC>` to list all Device MACs.
+    - Run `sudo ls /var/lib/bluetooth/` to find the AdapterMAC.
+    - You can use your prefered BT front-end (like Blueman) to find the DeviceMAC or run `sudo ls /var/lib/bluetooth/<AdapterMAC>` to list all Device MACs.
 6. `cd /mnt/windows/Windows/System32/config`
 7. `sudo chntpw -e SYSTEM`
 8. Now you should be inside the windows registry. We need to extract the keys for each BT device.
-  - `cd ControlSet001\Services\BTHPORT\Parameters\Keys`
-  - Run `ls` and find the MAC address of your BT Adapter.
-  - `cd <AdapterMAC>`
-  - Run `ls` again and find the DeviceMAC
-  - Run `hex <DeviceMAC>` and copy the key. It should look like: `55 BC 8B 59 33 50 78 E5 68 C5 B4 39 94 4F E1 U4`
+    - `cd ControlSet001\Services\BTHPORT\Parameters\Keys`
+    - Run `ls` and find the MAC address of your BT Adapter.
+    - `cd <AdapterMAC>`
+    - Run `ls` again and find the DeviceMAC
+    - Run `hex <DeviceMAC>` and copy the key. It should look like: `55 BC 8B 59 33 50 78 E5 68 C5 B4 39 94 4F E1 U4`
 9. Change the pairing key in Linux
-  - Open the `info` file of your BT device: `sudo vim /var/lib/bluetooth/<AdapterMAC>/<DeviceMAC>/info`
-  - Change the `Key` value in the `[LinkKey]` section with the key you copied from Windows **WITHOUT SPACES**.
-    - Example `Key=55BC8B59335078E568C5B439944FE1U4`
+    - Open the `info` file of your BT device: `sudo vim /var/lib/bluetooth/<AdapterMAC>/<DeviceMAC>/info`
+    - Change the `Key` value in the `[LinkKey]` section with the key you copied from Windows **WITHOUT SPACES**.
+        - Example `Key=55BC8B59335078E568C5B439944FE1U4`
 10. Restart your computer.
 11. Try connecting your BT device. It should work :)
 
