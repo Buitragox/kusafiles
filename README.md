@@ -21,7 +21,7 @@ I'm currently using the [rose pine](https://rosepinetheme.com) theme and palette
 ## Installed stuff
 
 ### Pacman packages
-- terminal: less fd ripgrep unzip fzf zoxide
+- terminal: less fd ripgrep unzip fzf zoxide atuin
 - clipboard: wl-clipboard
 - fonts: ttf-font-awesome ttf-firacode-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-0xproto-nerd
 - base programs: steam discord obs-studio eog vlc
@@ -48,6 +48,9 @@ First check the yay github for install guide.
 ### Mouse cursor 
 https://rosepinetheme.com/themes/cursor/
 
+### Zsh plugins and config
+I use [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh).
+
 ## Usage
 To keep all of these config files in a single repository, you need to create symlinks for each package/app into their respective directory. 
 
@@ -72,20 +75,19 @@ Related links:
 I had this issue where apps where not showing up as media players sometimes. The culprit was **wofi**.
 When I launched apps with the terminal or by running the .desktop file directly with `dex` it worked perfectly.
 
-wofi sometimes launches apps with different environment variables for some reason, one of these variables is the `DBUS_SESSION_BUS_ADDRESS`.
+wofi sometimes launches apps with different environment variables for some reason. One of these variables is the `DBUS_SESSION_BUS_ADDRESS`, which I think is related to the media player control.
 wofi used a different bus address just because?
 
-To test this, you can change the .desktop file (usually located at `/usr/share/applications`) of the application (for example firefox):
+To test this, you can change the .desktop file (usually located at `/usr/share/applications`) of the application. Example with Firefox:
 ```
 Exec=sh -c "env > /tmp/env_wofi.txt && /usr/lib/firefox/firefox %u"
 ```
-Then you can open the file (`vim /tmp/env_wofi.txt`) and check the env variables. Run `env` in another terminal and compare if `DBUS_SESSION_BUS_ADDRESS` is different.
+Run the program (in this case Firefox), open the file (`vim /tmp/env_wofi.txt`) and check the env variables. Run `env` in another terminal and compare if `DBUS_SESSION_BUS_ADDRESS` is different.
 
 You could try to fix it by adding the env variables to the Exec field of the .desktop file or something else. I honestly didn't try to fix it. At this point wofi gave me so many random problems that I gave up and installed [rofi-wayland](https://archlinux.org/packages/extra/x86_64/rofi-wayland/).
 
 
 ### Fix opera not playing video on X/Reddit/Twitch/etc
-
 Issue where you can play video on some websites with opera (installed with yay).
 Apparently opera installed with snap does not have this issue.
 
@@ -94,7 +96,6 @@ Possible fixes:
 - https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine
 
 ### Dark theme
-
 Some apps like Dolphin or Nautilus will have light theme by default.
 
 There are many ways to change this, like setting env variables.
@@ -111,15 +112,24 @@ If you installed a Mouse/Cursor theme but it's not working you can do the follow
 
 - Install nwg-look
 - Open GTK Settings
-- Go to "Mouse Cursor" and select you icon theme
+- Go to "Mouse Cursor" and select your icon theme
 - Click "Apply"
 - Restart
 
 ### Bluetooth dualboot
+Yes, I use Windows (man I sure love anticheats).
+
 If you have a Windows/Linux dualboot and you want to use Bluetooth devices on both
 you will experience issues. You will have to repair devices every time you switch OS.
 
-To fix this, you need to sync the pairing keys.
+You could also experience weird issues where your network card stops working in Windows (**VERY** annoying, thanks Microsoft :D). I **highly** recommend disabling "fast startup" in windows to fix this. You can look up online how to disable it, but these are the general steps:
+- Go to Control Panel > Power Options > Choose what the power buttons do.
+- Click "Change settings that are currently unavailable."
+- Uncheck "Turn on fast startup (recommended)."
+- Save changes.
+
+To avoid repairing, you need to sync the pairing keys (This guide is **not** for BT 5.1 devices. Check the resources below for more information).
+
 1. Log into Linux (unpair your devices if they were already paired) and pair your devices.
 2. Restart and log into Windows (unpair your devices if they were already paired) and pair your devices.
     - If you are having trouble removing a BT device, go into Device Manager -> Show -> Hidden devices
@@ -160,7 +170,7 @@ To disable this behavior follow this guide: https://wiki.archlinux.org/title/Gam
 
 ## Useful commands
 
-### Brightness and bluelight
+### Brightness and bluelight control
 ```sh
 # Blue light
 hyprctl hyprsunset temperature identity #default
