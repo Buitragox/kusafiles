@@ -68,7 +68,7 @@ Related links:
 - https://github.com/ValveSoftware/steam-for-linux/issues/9940
 - https://github.com/ValveSoftware/steam-for-linux/issues/9383
 
-### playerctl not detecting apps as media players because of wofi.
+### Playerctl not detecting apps as media players because of wofi
 I had this issue where apps where not showing up as media players sometimes. The culprit was **wofi**.
 When I launched apps with the terminal or by running the .desktop file directly with `dex` it worked perfectly.
 
