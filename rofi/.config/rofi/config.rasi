@@ -1,0 +1,12 @@
+configuration {
+  drun {
+    display-name: ">>";    
+  }
+}
+
+@theme "arthur"
+
+window {
+  width: 20%;
+}
+
