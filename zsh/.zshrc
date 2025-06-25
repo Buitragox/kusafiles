@@ -29,6 +29,9 @@ alias dcs="docker compose stop"
 # ===== asdf ===== #
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# ===== rust ===== #
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # ===== Load multiple neovim configs =====
 # Taken from https://gist.github.com/elijahmanor/b279553c0132bfad7eae23e34ceb593b with some modifications
 
