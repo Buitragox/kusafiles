@@ -126,10 +126,10 @@
         ],
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "  {signalStrength}%",
         "format-ethernet": "󰲝",
-        "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-wifi": "{essid}",
         "format-linked": "{ifname} (No IP) 󰈀",
         "format-disconnected": "󰲜",
         "format-alt": "{ifname}: {ipaddr}"
@@ -139,7 +139,6 @@
         "tooltip": false
     },
     "custom/gpu": {
-        // "exec": "cat /sys/class/hwmon/hwmon3/device/gpu_busy_percent",
         "exec": "python ~/.config/waybar/gpu_info.py",
         "return-type": "json",
         "format": "{}% 󰢮",

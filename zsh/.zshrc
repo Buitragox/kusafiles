@@ -17,7 +17,7 @@ alias nv="nvim"
 alias py="python3"
 alias pip="pip3"
 alias be="bundle exec" # For ruby
-alias zshedit="code ~/.zshrc"
+alias zshedit="nv ~/.zshrc"
 alias zshsource="source ~/.zshrc"
 
 # docker aliases
