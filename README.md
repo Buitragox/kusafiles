@@ -86,7 +86,6 @@ Run the program (in this case Firefox), open the file (`vim /tmp/env_wofi.txt`) 
 
 You could try to fix it by adding the env variables to the Exec field of the .desktop file or something else. I honestly didn't try to fix it. At this point wofi gave me so many random problems that I gave up and installed [rofi-wayland](https://archlinux.org/packages/extra/x86_64/rofi-wayland/).
 
-
 ### Fix opera not playing video on X/Reddit/Twitch/etc
 Issue where you can play video on some websites with opera (installed with yay).
 Apparently opera installed with snap does not have this issue.
@@ -164,6 +163,28 @@ Useful resources:
 - https://wiki.archlinux.org/title/Bluetooth#Dual_boot_pairing
 - https://github.com/nbanks/bluetooth-dualboot/issues/5
 - https://github.com/nbanks/bluetooth-dualboot
+
+### Disable a network interface/card
+**Rant**: The network card that came with my motherboard (Realtek 8852CE) has been giving me tons of issues.
+So I bought an Intel AX210 PCIe card, but now I have 2 network interfaces and I'm constantly confusing them.
+
+To disable a network card, we are going to blacklist the kernel driver module from loading at boot:
+
+1. Run `lspci -k` to see your pci devices + kernel drivers.
+2. Search for "Network controller" and find the device that you want to disable.
+3. Write down the kernel module. For example: `Kernel modules: rtw89_8852ce`.
+4. Create a file like `/etc/modprobe.d/blacklist-networkcard.conf` and blacklist the module. Example:
+```
+# /etc/modprobe.d/blacklist-realtek.conf
+blacklist rtw89_8852ce
+```
+
+5. Save the file and run `sudo mkinitcpio -P` to regenerate your initramfs.
+6. Reboot.
+
+>[!WARNING] You may need to reconfigure your WiFi connections to use `wlan0` if you were previously using `wlan1` or something else.
+
+If you run `ip a show` you should see only one WiFi interface like `wlan0`.
 
 ### PS5 Controller touchpad acting as a Mouse
 To disable this behavior follow this guide: https://wiki.archlinux.org/title/Gamepad#Disable_touchpad_acting_as_mouse
