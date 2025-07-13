@@ -7,13 +7,13 @@ from sys import stdout
 def mouse_info() -> dict:
     device_manager = DeviceManager()
     devices = list(filter(lambda d: d.type == 'mouse', device_manager.devices))
-    
+
     if not devices:
         return {"percentage": 0}
 
     device: RazerDevice = devices[0]
     battery = device.battery_level
-    
+
     res = {"percentage": battery}
 
     if device.is_charging:
@@ -24,7 +24,6 @@ def mouse_info() -> dict:
 
     return res
 
-    
 
 def main():
     while True:

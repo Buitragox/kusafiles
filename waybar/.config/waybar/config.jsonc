@@ -81,12 +81,12 @@
         }
     },
     "clock": {
-        "format": "{:%I:%M%p}",
+        "format": "{:%I:%M%p} ",
         "format-alt": "{:%a %d-%m-%Y}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "tooltip-format": "{calendar}",
         "calendar": {
-            "mode"          : "year",
-            "mode-mon-col"  : 3,
+            "mode"          : "month",
+            // "mode-mon-col"  : 3,
             "weeks-pos"     : "right",
             "on-scroll"     : 1,
             "format": {
@@ -96,6 +96,10 @@
                 "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
                 "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
+        },
+        "actions": {
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
         }
     },
     "custom/system-arrow": {
@@ -126,11 +130,11 @@
         ],
     },
     "network": {
-        "format-wifi": "  {signalStrength}%",
+        "format-wifi": " {signalStrength}%",
         "format-ethernet": "󰲝",
         "tooltip-format": "{ifname} via {gwaddr}",
         "tooltip-format-wifi": "{essid}",
-        "format-linked": "{ifname} (No IP) 󰈀",
+        "format-linked": "{ifname} (No IP)󰈀",
         "format-disconnected": "󰲜",
         "format-alt": "{ifname}: {ipaddr}"
     },

@@ -1,12 +1,13 @@
 @import './rose-pine/rose-pine.css';
 
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    /* font-family: FontAwesome, 'FiraCode Nerd Font', Roboto, Helvetica, Arial, sans-serif; */
-    font-family: FontAwesome, '0xProto Nerd Font', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    /* background-color: @base; */
-    /* color: @text; */
+  /* `otf-font-awesome` is required to be installed for icons */
+  /* font-family: FontAwesome, 'FiraCode Nerd Font', Roboto, Helvetica, Arial, sans-serif; */
+  /* font-family: FontAwesome, '0xProto Nerd Font Propo', Roboto, Helvetica, Arial, sans-serif; */
+  font-family: '0xProto Nerd Font Propo';
+  font-size: 13px;
+  /* background-color: @base; */
+  /* color: @text; */
 }
 
 window#waybar>box {
@@ -14,12 +15,13 @@ window#waybar>box {
 }
 
 window#waybar {
-    background-color: alpha(@base, 0.8);
-    color: @text;
-    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-    /* color: #ffffff; */
-    transition-property: background-color;
-    transition-duration: .5s;
+  /* background-color: alpha(@base, 0.8); */
+  background-color: transparent;
+  
+  color: @text;
+  /* color: #ffffff; */
+  transition-property: background-color;
+  transition-duration: .5s;
 }
 
 /* window#waybar.hidden { */
