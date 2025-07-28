@@ -182,12 +182,40 @@ blacklist rtw89_8852ce
 5. Save the file and run `sudo mkinitcpio -P` to regenerate your initramfs.
 6. Reboot.
 
->[!WARNING] You may need to reconfigure your WiFi connections to use `wlan0` if you were previously using `wlan1` or something else.
+> [!WARNING]
+> You may need to reconfigure your WiFi connections to use `wlan0` if you were previously using `wlan1` or something else.
 
 If you run `ip a show` you should see only one WiFi interface like `wlan0`.
 
 ### PS5 Controller touchpad acting as a Mouse
 To disable this behavior follow this guide: https://wiki.archlinux.org/title/Gamepad#Disable_touchpad_acting_as_mouse
+
+### Add Windows to GRUB
+1. Install os-prober: `sudo pacman -Sy os-prober`
+
+2. Run `sudo fdisk -l` and identify the EFI partition of Windows (e.g. "EFI System"). Take note of the partition name (e.g. "/dev/nvme0n1p1").
+3. We need to mount the partition, so create a directory to mount it: `mkdir -p /mnt/windows`
+4. Mount the partition: `sudo mount /dev/nvmeXnYpZ /mnt/windows`. (Use the actual name of your EFI partition)
+5. Edit the file `/etc/default/grub` and add/uncomment `GRUB_DISABLE_OS_PROBER=false`.
+6. Run `sudo grub-mkconfig -o /boot/grub/grub.cfg`. You should see the Windows boot manager in the output.
+
+### Add a GRUB theme
+First, get a theme. After you have a theme that you want to use:
+
+1. Copy the theme into the themes directory: `sudo cp <path/to/your/theme> /boot/grub/themes/`
+2. Add `GRUB_THEME="/boot/grub/themes/<YourTheme>/theme.txt"` in the `/etc/default/grub` file.
+
+### Rearrange the GRUB menu entries
+This method is semi-permanent. You will need to repeat these steps every time you run `grub-mkconfig`.
+
+> [!WARNING]
+> Use at your own risk.
+
+1. Open the `/boot/grub/grub.cfg` file.
+2. Look for the `menuentry` that you want to reorder.
+3. Cut and paste it where you want it to be.
+    - Entries are loaded in the order that they are specified.
+    - Be careful to cut the entire section and paste it outside of the declaration of other entries.
 
 ## Useful commands
 
