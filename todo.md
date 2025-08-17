@@ -31,8 +31,8 @@
 - [ ] Automate night light
 - [x] Customize cursor theme
 - [ ] Customize fastfetch
-- [ ] Customize the greeter
-- [ ] Change the zsh theme
+- [x] Customize the greeter
+- [x] Change the zsh theme
 
 # Future sidequests
 
@@ -58,4 +58,7 @@
   3. Raise an issue? to rose-pine
 
 - [ ] Make a simple wayland compositor?
+
+- [ ] Custom GRUB theme. Maybe MH themed? Upload it to pling?
+  - [x] Edited an existing theme for now.
 
