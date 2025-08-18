@@ -12,6 +12,8 @@ Configuration files for my Arch setup:
 - rofi
 - waybar
 - zshrc
+- grub
+- sddm
 
 There's also installed software/packages and troubleshooting steps.
 
@@ -21,21 +23,52 @@ I'm currently using the [rose pine](https://rosepinetheme.com) theme and palette
 ## Installed stuff
 
 ### Pacman packages
-- terminal: less fd ripgrep unzip fzf zoxide atuin
-- clipboard: wl-clipboard
-- fonts: ttf-font-awesome ttf-firacode-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-0xproto-nerd
-- base programs: steam discord obs-studio eog vlc
-- Theme customization (dark mode and mouse cursor): nwg-look
-- razer (check [openrazer](https://openrazer.github.io/#download) website): openrazer-daemon linux-headers python-openrazer
-- Media control: playerctl
-- waybar
-- Screenshots: jq grim slurp hyprpicker hyprshot
-- blue light filter: hyprsunset
-- brightness control: ddcutil
-- Bluetooth: bluez bluez-utils blueman
-- rustup
-- hardware monitoring: lm-sensors amdgpu_top
-- stow
+```sh
+# terminal
+sudo pacman -Sy less fd ripgrep unzip fzf zoxide atuin
+
+# clipboard:
+sudo pacman -Sy wl-clipboard
+
+# fonts:
+sudo pacman -Sy ttf-font-awesome ttf-firacode-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-0xproto-nerd
+
+# base programs:
+sudo pacman -Sy steam discord obs-studio eog vlc
+
+# Theme customization (dark mode and mouse cursor)
+sudo pacman -Sy nwg-look
+
+# razer (check https://openrazer.github.io/#download )
+sudo pacman -Sy openrazer-daemon linux-headers python-openrazer
+
+# Media control: 
+sudo pacman -Sy playerctl
+
+sudo pacman -Sy waybar
+
+# Screenshots:
+sudo pacman -Sy jq grim slurp hyprpicker hyprshot
+
+# blue light filter: 
+sudo pacman -Sy hyprsunset
+
+# brightness control: 
+sudo pacman -Sy ddcutil
+
+# Bluetooth: 
+sudo pacman -Sy bluez bluez-utils blueman
+
+sudo pacman -Sy rustup
+
+# hardware monitoring
+sudo pacman -Sy lm-sensors amdgpu_top
+
+sudo pacman -Sy stow
+
+# Lock screen
+sudo pacman -Sy hypridle hyprlock
+```
 
 ### Yay packages
 First check the yay github for install guide.
@@ -43,7 +76,10 @@ First check the yay github for install guide.
 - opera (check troubleshooting section for video fix)
 
 ### Rust packages
-- Markdown viewer: inlyne
+```sh
+# Markdown viewer
+cargo install inlyne
+```
 
 ### Mouse cursor 
 https://rosepinetheme.com/themes/cursor/
@@ -57,11 +93,13 @@ To keep all of these config files in a single repository, you need to create sym
 I use [stow](https://www.gnu.org/software/stow/) to manage the symlinks.
 
 1. Install stow with your package manager: `sudo pacman -S stow`
-2. Use `stow PACKAGE_NAME` to create a symlink for the desired package. 
-    - Example: `stow nvim`. This will create a symlink for Neovim into `~/.config/nvim`.
+2. Use the `install.sh` script to create symlinks for each package.
+    - You can also use `stow PACKAGE_NAME` to create a symlink for the desired package. 
+        - Example: `stow nvim`. This will create a symlink for Neovim into `~/.config/nvim`.
+    - Some packages add files outside of the home directory, so you need to specify the directory.
+        - Example: `sudo stow grub -t /`
 
-
-## Troubleshooting
+## Guides / Troubleshooting
 I try to document any major problems that I have come across during my arch adventures and how to solve them. Maybe you'll find something useful here :)
 
 ### Run steam with wofi
@@ -127,7 +165,7 @@ You could also experience weird issues where your network card stops working in 
 - Uncheck "Turn on fast startup (recommended)."
 - Save changes.
 
-To avoid repairing, you need to sync the pairing keys (This guide is **not** for BT 5.1 devices. Check the resources below for more information).
+To avoid re-pairing, you need to sync the pairing keys (This guide is **not** for BT 5.1 devices. Check the resources below for more information).
 
 1. Log into Linux (unpair your devices if they were already paired) and pair your devices.
 2. Restart and log into Windows (unpair your devices if they were already paired) and pair your devices.
