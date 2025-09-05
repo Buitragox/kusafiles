@@ -26,6 +26,9 @@ alias dcu="docker compose up -d"
 alias dcr="docker compose --force-recreate --build -d"
 alias dcs="docker compose stop"
 
+# ===== env ===== #
+export SUDO_EDITOR=nvim
+
 # ===== asdf ===== #
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
@@ -80,5 +83,3 @@ eval "$(atuin init zsh)"
 # IMPORTANT: Must be sourced at the end
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
