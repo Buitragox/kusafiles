@@ -2,6 +2,7 @@
 
 # This script monitors changes to files in
 # ~/.config/waybar/ and restarts Waybar automatically.
+# Useful for hot reloading the config while working on it.
 
 # --- Prerequisites ---
 # Ensure you have 'inotify-tools' installed.
