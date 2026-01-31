@@ -1,7 +1,7 @@
-# My funny arch configuration
+# Funny arch configuration
 *Why is it funny you ask?*
 
-Idk dude, you ask too many questions.
+I don't know.
 
 ## What's in here?
 Configuration files for my Arch setup:
@@ -13,7 +13,7 @@ Configuration files for my Arch setup:
 - waybar
 - zshrc
 - grub
-- sddm
+- sddm (currently not using it, I'm using [GodotGreetd](https://github.com/Buitragox/GodotGreetd))
 
 There's also installed software/packages and troubleshooting steps.
 
@@ -25,55 +25,48 @@ I'm currently using the [rose pine](https://rosepinetheme.com) theme and palette
 ### Pacman packages
 ```sh
 # terminal
-sudo pacman -Sy less fd ripgrep unzip fzf zoxide atuin
+sudo pacman -S less fd ripgrep unzip fzf zoxide atuin
 
 # clipboard:
-sudo pacman -Sy wl-clipboard
+sudo pacman -S wl-clipboard
 
 # fonts:
-sudo pacman -Sy ttf-font-awesome ttf-firacode-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-0xproto-nerd
+sudo pacman -S ttf-font-awesome ttf-firacode-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-0xproto-nerd
 
 # base programs:
-sudo pacman -Sy steam discord obs-studio eog vlc
+sudo pacman -S steam discord obs-studio eog vlc
 
 # Theme customization (dark mode and mouse cursor)
-sudo pacman -Sy nwg-look
+sudo pacman -S nwg-look
 
 # razer (check https://openrazer.github.io/#download )
-sudo pacman -Sy openrazer-daemon linux-headers python-openrazer
+sudo pacman -S openrazer-daemon linux-headers python-openrazer
 
 # Media control: 
-sudo pacman -Sy playerctl
-
-sudo pacman -Sy waybar
+sudo pacman -S playerctl
 
 # Screenshots:
-sudo pacman -Sy jq grim slurp hyprpicker hyprshot
+sudo pacman -S jq grim slurp hyprpicker hyprshot
 
 # blue light filter: 
-sudo pacman -Sy hyprsunset
+sudo pacman -S hyprsunset
 
 # brightness control: 
-sudo pacman -Sy ddcutil
+sudo pacman -S ddcutil
 
 # Bluetooth: 
-sudo pacman -Sy bluez bluez-utils blueman
-
-sudo pacman -Sy rustup
+sudo pacman -S bluez bluez-utils blueman
 
 # hardware monitoring
-sudo pacman -Sy lm-sensors amdgpu_top
-
-sudo pacman -Sy stow
+sudo pacman -S lm-sensors amdgpu_top
 
 # Lock screen
-sudo pacman -Sy hypridle hyprlock
+sudo pacman -S hypridle hyprlock
+
+sudo pacman -S stow
+sudo pacman -S waybar
+sudo pacman -S rustup
 ```
-
-### Yay packages
-First check the yay github for install guide.
-
-- opera (check troubleshooting section for video fix)
 
 ### Rust packages
 ```sh
@@ -82,9 +75,10 @@ cargo install inlyne
 ```
 
 ### Mouse cursor 
-https://rosepinetheme.com/themes/cursor/
+Rose Pine: https://rosepinetheme.com/themes/cursor/
+Or Breeze Dark from KDE.
 
-### Zsh plugins and config
+### Zsh
 I use [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh).
 
 ## Usage
@@ -129,7 +123,7 @@ Issue where you can play video on some websites with opera (installed with yay).
 Apparently opera installed with snap does not have this issue.
 
 Possible fixes:
-- Install this [yay package](https://aur.archlinux.org/packages/opera-ffmpeg-codecs): `yay -Syu opera-ffmpeg-codecs`
+- Install this [yay package](https://aur.archlinux.org/packages/opera-ffmpeg-codecs): `yay -S opera-ffmpeg-codecs`
 - https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine
 
 ### Dark theme
@@ -138,7 +132,7 @@ Some apps like Dolphin or Nautilus will have light theme by default.
 There are many ways to change this, like setting env variables.
 
 This is what worked for me:
-- Install nwg-look: `sudo pacman -Syu nwg-look`
+- Install nwg-look: `sudo pacman -S nwg-look`
 - Open GTK Settings
 - In the widgets sections, look for "Color scheme" and select Prefer dark
 - (optional) Restart
@@ -224,6 +218,22 @@ blacklist rtw89_8852ce
 > You may need to reconfigure your WiFi connections to use `wlan0` if you were previously using `wlan1` or something else.
 
 If you run `ip a show` you should see only one WiFi interface like `wlan0`.
+
+### Disable bluetooth adapter
+1. Run `lsusb`. You will see something like this:
+```
+Bus 001 Device 003: ID 0bda:0852 Realtek Semiconductor Corp. Bluetooth Radio
+```
+2. The `0bda:0852` (probably different for you) is the `idVendor:idProduct`. Take note of these values.
+3. Create a file `/etc/udev/rules.d/99-disable-bt.rules`:
+```
+SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="0852", ATTR{authorized}="0"
+```
+4. Run `sudo udevadm control --reload`
+5. Run `sudo udevadm trigger`
+6. Restart
+
+You should no longer see the bluetooth adapter in your bluetooth app (blueman or similar).
 
 ### PS5 Controller touchpad acting as a Mouse
 To disable this behavior follow this guide: https://wiki.archlinux.org/title/Gamepad#Disable_touchpad_acting_as_mouse
