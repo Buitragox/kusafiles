@@ -28,12 +28,16 @@ alias dcs="docker compose stop"
 
 # ===== env ===== #
 export SUDO_EDITOR=nvim
+export EDITOR=zeditor
 
-# ===== asdf ===== #
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# ===== mise ===== #
+eval "$(/home/fawaris/.local/bin/mise activate zsh)"
 
 # ===== rust ===== #
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# ===== local binaries ====== #
+export PATH="$HOME/.local/bin:$PATH"
 
 # ===== Load multiple neovim configs =====
 # Taken from https://gist.github.com/elijahmanor/b279553c0132bfad7eae23e34ceb593b with some modifications
@@ -78,6 +82,7 @@ function _fzf_compgen_dir() {
 # ===== other tools ===== #
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(atuin init zsh)"
+eval "$(keychain --eval --quiet id_ed25519)"
 
 # ===== syntax highlighting and autosuggestions =====
 # IMPORTANT: Must be sourced at the end
