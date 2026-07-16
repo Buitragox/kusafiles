@@ -1,0 +1,4 @@
+theme = Rose Pine
+
+gtk-custom-css = /home/fawaris/.config/ghostty/tabbar.css
+window-save-state = always

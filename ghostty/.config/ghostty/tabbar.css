@@ -1,0 +1,29 @@
+tabbar {
+  /* margin: -4px; */
+  margin-top: -3px;
+  margin-bottom: -3px;
+}
+
+tabbar tabbox {
+  /* margin-top: -4px; */
+  /* margin-bottom: -4px; */
+  /* padding-top: -4px; */
+  /* padding-bottom: -4px; */
+  /* max-height: 10px; */
+}
+
+/* tabbar tabbox tab { */
+/*   padding-bottom: -2px; */
+/*   padding-top: -2px; */
+/* } */
+
+tabbar tabbox button {
+  /* min-height: 20px; */
+  /* min-width: 20px; */
+  /* margin-top: -4px; */
+  /* margin-bottom: -4px; */
+}
+
+/* tabbar tabbox { */
+/*   transform: translateY(-2px); */
+/* } */

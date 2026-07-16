@@ -1,10 +1,10 @@
 # Check if stow is installed
 if ! command -v stow >/dev/null 2>&1; then
-  echo "stow is not installed. Install it with:\nsudo pacman -Sy stow"
+  echo "stow is not installed. Install it with:\nsudo pacman -S stow"
 fi
 
 # Standard stuff
-stow atuin delta hypr kitty nvim rofi waybar zsh
+stow atuin delta hypr kitty ghostty nvim rofi waybar zsh
 
 # Packages that work outside of home directory
 sudo stow grub sddm -t /
