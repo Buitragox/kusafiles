@@ -83,6 +83,7 @@ function _fzf_compgen_dir() {
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(atuin init zsh)"
 eval "$(keychain --eval --quiet id_ed25519)"
+eval "$(zellij setup --generate-auto-start zsh)"
 
 # ===== syntax highlighting and autosuggestions =====
 # IMPORTANT: Must be sourced at the end

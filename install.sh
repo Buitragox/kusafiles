@@ -4,7 +4,7 @@ if ! command -v stow >/dev/null 2>&1; then
 fi
 
 # Standard stuff
-stow atuin delta hypr kitty ghostty nvim rofi waybar zsh
+stow atuin delta hypr kitty ghostty nvim rofi waybar zellij zsh
 
 # Packages that work outside of home directory
 sudo stow grub sddm -t /

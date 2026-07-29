@@ -7,10 +7,12 @@ I don't know.
 Configuration files for my Arch setup:
 - atuin
 - hyprland
+- ghostty
 - kitty
 - nvim
 - rofi
 - waybar
+- zellij
 - zshrc
 - grub
 - sddm (currently not using it, I'm using [GodotGreetd](https://github.com/Buitragox/GodotGreetd))
@@ -34,7 +36,7 @@ sudo pacman -S wl-clipboard
 sudo pacman -S ttf-font-awesome ttf-firacode-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-0xproto-nerd
 
 # base programs:
-sudo pacman -S steam discord obs-studio eog vlc
+sudo pacman -S steam discord obs-studio eog vlc obsidian
 
 # Theme customization (dark mode and mouse cursor)
 sudo pacman -S nwg-look
@@ -65,13 +67,6 @@ sudo pacman -S hypridle hyprlock
 
 sudo pacman -S stow
 sudo pacman -S waybar
-sudo pacman -S rustup
-```
-
-### Rust packages
-```sh
-# Markdown viewer
-cargo install inlyne
 ```
 
 ### Mouse cursor 
@@ -94,7 +89,7 @@ I use [stow](https://www.gnu.org/software/stow/) to manage the symlinks.
         - Example: `sudo stow grub -t /`
 
 ## Guides / Troubleshooting
-I try to document any major problems that I have come across during my arch adventures and how to solve them. Maybe you'll find something useful here :)
+I try to document any major problems that I have come across during my arch linux adventures and how to solve them. Maybe you'll find something useful here :)
 
 ### Run steam with wofi
 Make `PrefersNonDefaultGPU=false` in .desktop file of Steam.
@@ -107,16 +102,20 @@ Related links:
 I had this issue where apps where not showing up as media players sometimes. The culprit was **wofi**.
 When I launched apps with the terminal or by running the .desktop file directly with `dex` it worked perfectly.
 
-wofi sometimes launches apps with different environment variables for some reason. One of these variables is the `DBUS_SESSION_BUS_ADDRESS`, which I think is related to the media player control.
+wofi sometimes launches apps with different environment variables for some reason. 
+One of these variables is the `DBUS_SESSION_BUS_ADDRESS`, which I think is related to the media player control.
 wofi used a different bus address just because?
 
 To test this, you can change the .desktop file (usually located at `/usr/share/applications`) of the application. Example with Firefox:
 ```
 Exec=sh -c "env > /tmp/env_wofi.txt && /usr/lib/firefox/firefox %u"
 ```
-Run the program (in this case Firefox), open the file (`vim /tmp/env_wofi.txt`) and check the env variables. Run `env` in another terminal and compare if `DBUS_SESSION_BUS_ADDRESS` is different.
+Run the program (in this case Firefox), open the file (`vim /tmp/env_wofi.txt`) and check the env variables. 
+Run `env` in another terminal and compare if `DBUS_SESSION_BUS_ADDRESS` is different.
 
-You could try to fix it by adding the env variables to the Exec field of the .desktop file or something else. I honestly didn't try to fix it. At this point wofi gave me so many random problems that I gave up and installed [rofi-wayland](https://archlinux.org/packages/extra/x86_64/rofi-wayland/).
+You could try to fix it by adding the env variables to the Exec field of the .desktop file or something else. 
+I honestly didn't try to fix it. At this point wofi gave me so many random problems that I gave up and installed 
+[rofi-wayland](https://archlinux.org/packages/extra/x86_64/rofi-wayland/).
 
 ### Fix opera not playing video on X/Reddit/Twitch/etc
 Issue where you can play video on some websites with opera (installed with yay).
@@ -148,16 +147,10 @@ If you installed a Mouse/Cursor theme but it's not working you can do the follow
 - Restart
 
 ### Bluetooth dualboot
-Yes, I use Windows (man I sure love anticheats).
+Yes, I use Windows (I sure love anticheats).
 
 If you have a Windows/Linux dualboot and you want to use Bluetooth devices on both
-you will experience issues. You will have to repair devices every time you switch OS.
-
-You could also experience weird issues where your network card stops working in Windows (**VERY** annoying, thanks Microsoft :D). I **highly** recommend disabling "fast startup" in windows to fix this. You can look up online how to disable it, but these are the general steps:
-- Go to Control Panel > Power Options > Choose what the power buttons do.
-- Click "Change settings that are currently unavailable."
-- Uncheck "Turn on fast startup (recommended)."
-- Save changes.
+you will experience issues. You will have to re-pair devices every time you switch OS.
 
 To avoid re-pairing, you need to sync the pairing keys (This guide is **not** for BT 5.1 devices. Check the resources below for more information).
 
@@ -195,6 +188,14 @@ Useful resources:
 - https://wiki.archlinux.org/title/Bluetooth#Dual_boot_pairing
 - https://github.com/nbanks/bluetooth-dualboot/issues/5
 - https://github.com/nbanks/bluetooth-dualboot
+
+### Network card stops working with dualboot
+You could also experience weird issues where your network card stops working in Windows (**VERY** annoying, thanks Microsoft :D).
+I **highly** recommend disabling "fast startup" in windows to fix this. You can look up online how to disable it, but these are the general steps:
+- Go to Control Panel > Power Options > Choose what the power buttons do.
+- Click "Change settings that are currently unavailable."
+- Uncheck "Turn on fast startup"
+- Save changes.
 
 ### Disable a network interface/card
 **Rant**: The network card that came with my motherboard (Realtek 8852CE) has been giving me tons of issues.
@@ -277,10 +278,3 @@ hyprctl hyprsunset temperature 2500
 ddcutil getvcp 10 # Get brightness
 ddcutil setvcp 10 40 # Set brightness to 40
 ```
-
-### zsh keybinds
-Different keybind configs for zsh
-
-```sh
-bindkey -e # emacs (default)
-bindkey -v # vi

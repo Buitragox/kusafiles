@@ -2,3 +2,21 @@ theme = Rose Pine
 
 gtk-custom-css = /home/fawaris/.config/ghostty/tabbar.css
 window-save-state = always
+
+# Zellij owns tabs.
+keybind = ctrl+shift+t=unbind
+keybind = ctrl+shift+w=unbind
+keybind = ctrl+tab=unbind
+keybind = ctrl+shift+tab=unbind
+
+# Zellij pane shortcuts.
+keybind = ctrl+shift+enter=unbind
+keybind = ctrl+alt+enter=unbind
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+keybind = alt+up=unbind
+keybind = alt+down=unbind
+
+# Zellij tab prev/next with brackets.
+keybind = ctrl+shift+[=unbind
+keybind = ctrl+shift+]=unbind
