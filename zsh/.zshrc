@@ -39,6 +39,17 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # ===== local binaries ====== #
 export PATH="$HOME/.local/bin:$PATH"
 
+# ===== opencode ====== #
+export PATH=/home/fawaris/.opencode/bin:$PATH
+
+# ===== other tools ===== #
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(atuin init zsh)"
+eval "$(keychain --eval --quiet id_ed25519)"
+# Attach to the existing zellij session instead of creating a new one every time
+export ZELLIJ_AUTO_ATTACH=true
+eval "$(zellij setup --generate-auto-start zsh)"
+
 # ===== Load multiple neovim configs =====
 # Taken from https://gist.github.com/elijahmanor/b279553c0132bfad7eae23e34ceb593b with some modifications
 
@@ -79,13 +90,8 @@ function _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# ===== other tools ===== #
-eval "$(zoxide init --cmd cd zsh)"
-eval "$(atuin init zsh)"
-eval "$(keychain --eval --quiet id_ed25519)"
-eval "$(zellij setup --generate-auto-start zsh)"
-
 # ===== syntax highlighting and autosuggestions =====
 # IMPORTANT: Must be sourced at the end
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+

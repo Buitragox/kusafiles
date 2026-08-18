@@ -20,3 +20,6 @@ keybind = alt+down=unbind
 # Zellij tab prev/next with brackets.
 keybind = ctrl+shift+[=unbind
 keybind = ctrl+shift+]=unbind
+
+# Zellij owns tab moving (kitty-style ctrl+shift+< / >); free the comma from reload_config.
+keybind = ctrl+shift+,=unbind
