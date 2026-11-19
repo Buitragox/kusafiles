@@ -3,60 +3,17 @@
 //
 
 keybinds clear-defaults=true {
-    locked {
-        bind "Ctrl Space" { SwitchToMode "normal"; }
-
-        bind "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Alt Up" { MoveFocus "Up"; }
-        bind "Alt Down" { MoveFocus "Down"; }
-        bind "Alt h" { MoveFocusOrTab "left"; }
-        bind "Alt j" { MoveFocus "down"; }
-        bind "Alt k" { MoveFocus "up"; }
-        bind "Alt l" { MoveFocusOrTab "right"; }
-
-        bind "Alt 1" { GoToTab 1; }
-        bind "Alt 2" { GoToTab 2; }
-        bind "Alt 3" { GoToTab 3; }
-        bind "Alt 4" { GoToTab 4; }
-        bind "Alt 5" { GoToTab 5; }
-        bind "Alt 6" { GoToTab 6; }
-        bind "Alt 7" { GoToTab 7; }
-        bind "Alt 8" { GoToTab 8; }
-        bind "Alt 9" { GoToTab 9; }
-
-        bind "Alt n" { NewPane; }
-        bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
-        bind "Alt i" "Ctrl Shift <" "Ctrl Shift ," { MoveTab "left"; }
-        bind "Alt o" "Ctrl Shift >" "Ctrl Shift ." { MoveTab "right"; }
-        bind "Alt p" { TogglePaneInGroup; }
-        bind "Alt Shift p" { ToggleGroupMarking; }
-
-        bind "Ctrl Shift t" { NewTab; }
-        bind "Ctrl Shift w" { CloseTab; }
-        bind "Ctrl Tab" { GoToNextTab; }
-        bind "Ctrl Shift Tab" { GoToPreviousTab; }
-        bind "Ctrl Shift [" { MoveFocusOrTab "Left"; }
-        bind "Ctrl Shift ]" { MoveFocusOrTab "Right"; }
-        bind "Ctrl Shift r" { SwitchToMode "RenameTab"; TabNameInput 0; }
-        bind "Ctrl Shift Enter" { NewPane "Right"; }
-        bind "Ctrl Alt Enter" { NewPane "Down"; }
-    }
-
     normal {
-        bind "p" { SwitchToMode "pane"; }
-        bind "t" { SwitchToMode "tab"; }
-        bind "n" { SwitchToMode "resize"; }
         bind "h" { SwitchToMode "move"; }
+        bind "n" { SwitchToMode "resize"; }
         bind "o" { SwitchToMode "session"; }
-        bind "s" { SwitchToMode "scroll"; }
+        bind "p" { SwitchToMode "pane"; }
         bind "q" { Quit; }
-        bind "Esc" { SwitchToMode "locked"; }
+        bind "s" { SwitchToMode "scroll"; }
+        bind "t" { SwitchToMode "tab"; }
+    }
+    locked {
+        bind "Ctrl space" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; SwitchToMode "locked"; }
@@ -175,6 +132,7 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "locked"
         }
+        bind "d" { Detach; }
         bind "l" {
             LaunchOrFocusPlugin "zellij:layout-manager" {
                 floating true
@@ -204,49 +162,34 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "locked"
         }
-        bind "d" { Detach; }
     }
-    shared_except "locked" {
-        // Tabs
-        bind "Ctrl Shift t" { NewTab; }
-        bind "Ctrl Shift w" { CloseTab; }
-        bind "Ctrl Tab" { GoToNextTab; }
-        bind "Ctrl Shift Tab" { GoToPreviousTab; }
-        bind "Ctrl Shift [" { MoveFocusOrTab "Left"; }
-        bind "Ctrl Shift ]" { MoveFocusOrTab "Right"; }
-        bind "Ctrl Shift r" {
-            SwitchToMode "RenameTab";
-            TabNameInput 0;
-        }
-
-        // Panes
-        bind "Ctrl Shift Enter" { NewPane "Right"; }
-        bind "Ctrl Alt Enter" { NewPane "Down"; }
-
-        bind "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Alt Up" { MoveFocus "Up"; }
-        bind "Alt Down" { MoveFocus "Down"; }
-
-        bind "Alt f" { ToggleFloatingPanes; }
-
+    shared {
         bind "Alt +" { Resize "Increase"; }
+        bind "Ctrl Shift ," { MoveTab "left"; }
         bind "Alt -" { Resize "Decrease"; }
+        bind "Ctrl Shift ." { MoveTab "right"; }
+        bind "Ctrl Shift <" { MoveTab "left"; }
         bind "Alt =" { Resize "Increase"; }
+        bind "Ctrl Shift >" { MoveTab "right"; }
+        bind "Ctrl Shift [" { MoveFocusOrTab "left"; }
         bind "Alt [" { PreviousSwapLayout; }
+        bind "Ctrl Shift ]" { MoveFocusOrTab "right"; }
         bind "Alt ]" { NextSwapLayout; }
-        bind "Alt i" "Ctrl Shift <" "Ctrl Shift ," { MoveTab "left"; }
+        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
-        bind "Alt o" "Ctrl Shift >" "Ctrl Shift ." { MoveTab "right"; }
+        bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
+        bind "Ctrl Shift r" { SwitchToMode "renametab"; TabNameInput 0; }
+        bind "Ctrl Shift t" { NewTab; }
+        bind "Ctrl Shift w" { CloseTab; }
+        bind "Ctrl tab" { GoToNextTab; }
+        bind "Ctrl Shift tab" { GoToPreviousTab; }
+        bind "Ctrl Alt enter" { NewPane "down"; }
+        bind "Ctrl Shift enter" { NewPane "right"; }
     }
-
-    shared_except "locked" "renametab" "renamepane" {
-        bind "Ctrl Space" { SwitchToMode "locked"; }
-    }
-
-    shared_except "locked" "renametab" {
+    shared_except "renametab" {
         bind "Alt 1" { GoToTab 1; }
         bind "Alt 2" { GoToTab 2; }
         bind "Alt 3" { GoToTab 3; }
@@ -257,9 +200,7 @@ keybinds clear-defaults=true {
         bind "Alt 8" { GoToTab 8; }
         bind "Alt 9" { GoToTab 9; }
     }
-
-
-    shared_except "locked" "scroll" {
+    shared_except "scroll" {
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }
@@ -269,18 +210,15 @@ keybinds clear-defaults=true {
         bind "Alt k" { MoveFocus "up"; }
         bind "Alt l" { MoveFocusOrTab "right"; }
     }
-
-
-
-
-
+    shared_except "locked" "renametab" "renamepane" {
+        bind "Ctrl space" { SwitchToMode "locked"; }
+    }
+    shared_except "locked" "entersearch" "renametab" "renamepane" {
+        bind "esc" { SwitchToMode "locked"; }
+    }
     shared_except "normal" "locked" "entersearch" {
         bind "enter" { SwitchToMode "locked"; }
     }
-    shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
-        bind "esc" { SwitchToMode "locked"; }
-    }
-
     shared_among "scroll" "search" {
         bind "PageDown" { PageScrollDown; }
         bind "PageUp" { PageScrollUp; }
@@ -306,17 +244,13 @@ keybinds clear-defaults=true {
     }
     renametab {
         bind "esc" { UndoRenameTab; SwitchToMode "locked"; }
-        bind "enter" { SwitchToMode "locked"; }
     }
     shared_among "renametab" "renamepane" {
         bind "Ctrl c" { SwitchToMode "locked"; }
     }
     renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "locked"; }
-        bind "enter" { SwitchToMode "locked"; }
     }
-
-
 }
 
 // Plugin aliases - can be used to change the implementation of Zellij
@@ -596,7 +530,7 @@ attach_to_session true
 // Whether to show tips on startup
 // Default: true
 // 
-// show_startup_tips false
+show_startup_tips false
  
 // Whether to show release notes on first version run
 // Default: true

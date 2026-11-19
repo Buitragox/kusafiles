@@ -33,6 +33,9 @@ export EDITOR=zeditor
 # ===== mise ===== #
 eval "$(/home/fawaris/.local/bin/mise activate zsh)"
 
+# ===== go ===== #
+export PATH="$HOME/go/bin:$PATH"
+
 # ===== rust ===== #
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -45,7 +48,7 @@ export PATH=/home/fawaris/.opencode/bin:$PATH
 # ===== other tools ===== #
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(atuin init zsh)"
-eval "$(keychain --eval --quiet id_ed25519)"
+eval "$(keychain --eval --quiet --immediate id_ed25519)"
 # Attach to the existing zellij session instead of creating a new one every time
 export ZELLIJ_AUTO_ATTACH=true
 eval "$(zellij setup --generate-auto-start zsh)"

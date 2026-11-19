@@ -88,6 +88,12 @@ I use [stow](https://www.gnu.org/software/stow/) to manage the symlinks.
     - Some packages add files outside of the home directory, so you need to specify the directory.
         - Example: `sudo stow grub -t /`
 
+### Adding a new package
+
+1. Create the package dir with the desired path, e.g. `mkdir -p zellij/.config/zellij`
+2. Copy config files there, then `stow --adopt zellij` to move originals into the repo and symlink back
+3. If stow creates individual file symlinks instead of a single dir symlink, undo first (`stow -D`), delete the leftover target dir (e.g. `rm -rf ~/.config/zellij`), then `stow` again
+
 ## Guides / Troubleshooting
 I try to document any major problems that I have come across during my arch linux adventures and how to solve them. Maybe you'll find something useful here :)
 
